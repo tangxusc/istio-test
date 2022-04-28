@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client
+  template:
+    metadata:
+      labels:
+        app: client
+    spec:
+      containers:
+        - name: client
+          image: headless:test
+          command:
+            - './client'
+          workingDir: /
+          env:
+            - name: ADDR
+#              value: "dns:///server:8080"
+              value: "server:8080"
